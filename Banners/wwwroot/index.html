@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-orange.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body ng-app="BannersApp"  class="w3-theme-l4">
+    <div class="w3-bar w3-theme-d4" >
+        <a href="#/!" class="w3-bar-item w3-button"><strong>BannersApp</strong></a>
+        <a href="#/!" class="w3-bar-item w3-button">View</a>
+        <a href="#!add" class="w3-bar-item w3-button">Add</a>
+    </div>
+
+    <div ng-view class="w3-container" >
+
+    </div>
+
+    <script>
+        var app = angular.module("BannersApp", ["ngRoute"]);
+        //routing configuration
+        app.config(function ($routeProvider) {
+
+            $routeProvider
+            .when("/", {
+                templateUrl : "main.html"               
+            })
+            .when("/add", {
+                templateUrl : "add.html",
+                controller : "POSTController"
+            });
+        });
+
+        //getting data from web API
+        app.controller('GetController', function($scope, $http) {
+            $scope.editedBanner = {};
+            $scope.originalBanner = {};
+
+            $http.get("/api/banners")
+            .then(function(response) {
+                $scope.banners = response.data;
+                });
+
+            $scope.edit = function(banner){
+                document.getElementById('editModal').style.display = 'block';
+                $scope.originalBanner = banner;
+                $scope.editedBanner = angular.copy(banner);
+            };
+
+            //Deleting data through API
+            $scope.delete = function(id){
+                $http.delete('/api/banners/' + id)
+                .then(function(){window.location.href ='#/!';}, function(){alert('Delete operation failed!');window.location.href ='#/!';});
+            };  
+
+            // Update data through API
+             $scope.update = function(){
+                var req = {
+                    method: 'PUT',
+                    url: '/api/banners/' + $scope.editedBanner.id,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify($scope.editedBanner)
+                    }
+                    
+                    $http(req)
+                    .then(function(){window.location.href ='#/!';}, function(err){alert('Update operation failed');});
+            };            
+
+        });
+
+        //Adding data through API
+        app.controller('POSTController', function($scope,$http) {
+            $scope.banner = {};
+            $scope.submit = function() {
+                //$scope.banner.id=0;
+                var req = {
+                    method: 'POST',
+                    url: '/api/banners',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify($scope.banner)
+                    }
+                    
+                    $http(req)
+                    .then(function(suc){window.location.href ='#/!';}, function(err){alert('Failed to add new Banner');});
+                };
+        });
+
+    </script>
+</body>
+</html>

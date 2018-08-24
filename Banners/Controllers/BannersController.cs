@@ -146,7 +146,6 @@ namespace Banners.Controllers
             {
                 return NotFound();
             }
-
             return Ok(banner.Html);
         }
 
