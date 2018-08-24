@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Banners.Extensions;
 using Banners.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,9 @@ namespace Banners
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BannerContext>(options => options.UseInMemoryDatabase("Banner"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options => options.OutputFormatters.Add(new HtmlOutputFormatter()))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
 
         }
 

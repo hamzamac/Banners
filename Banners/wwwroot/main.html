@@ -15,7 +15,7 @@
         <tr ng-repeat="b in banners | filter : text">
             <td>{{b.id }}</td>
             <td>{{b.created | date : "dd.MM.y" }}</td>
-            <td ng-bind-html="b.html"></td>
+            <td><code>{{b.html}}</code></td>
             <td class="w3-right">
                 <button class="w3-button w3-tiny w3-grey" ng-click="edit(b)">Edit</button>
                 <button class="w3-button w3-tiny w3-red" ng-click="delete(b.id)">Delete</button>

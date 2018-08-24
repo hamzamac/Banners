@@ -132,7 +132,7 @@ namespace Banners.Controllers
             return Ok(banner);
         }
 
-        [HttpGet("{id:int}/html")]
+        [HttpGet("{id:int}/html"), Produces("text/html")]
         public async Task<IActionResult> GetHtml([FromRoute]int id)
         {
             if (!ModelState.IsValid)
