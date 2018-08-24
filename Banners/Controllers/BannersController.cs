@@ -62,7 +62,8 @@ namespace Banners.Controllers
             }
 
             //validate html
-            if (!banner.HasValidHtml()) return BadRequest("Invalid HTML in banner");
+            var errors = await banner.ValidateHtmlAsync();
+            if (errors.Count > 0) return BadRequest(errors);
 
             //assign modified date
             banner.Modified = DateTime.Now;
@@ -98,7 +99,8 @@ namespace Banners.Controllers
             }
 
             //validate html
-            if (!banner.HasValidHtml()) return BadRequest("Invalid HTML in banner");
+            var errors = await banner.ValidateHtmlAsync();
+            if (errors.Count > 0) return BadRequest(errors);
 
             //set Created date
             banner.Created = DateTime.Now;
