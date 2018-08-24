@@ -130,6 +130,25 @@ namespace Banners.Controllers
             return Ok(banner);
         }
 
+        [HttpGet("{id:int}/html")]
+        public async Task<IActionResult> GetHtml([FromRoute]int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var banner = await _context.Banners.FindAsync(id);
+
+            if (banner == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(banner.Html);
+        }
+
+
         private bool BannerExists(int id)
         {
             return _context.Banners.Any(e => e.Id == id);
