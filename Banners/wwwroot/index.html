@@ -71,7 +71,11 @@
                         .then(function () { window.location.href = '#/!'; }, function (err) {
                             alert("The provided banner has the following errors: \n*" + err.data.join('\n*'));
                         });
-            };            
+            }; 
+
+            $scope.display = function (id) {
+                window.location.href = "/api/banners/" + id + "/html";
+            };
 
         });
 

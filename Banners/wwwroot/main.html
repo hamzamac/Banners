@@ -2,12 +2,12 @@
 
     <h2>Banner's List</h2>
     <input type="text" ng-model="text" class="w3-bar-item w3-input" placeholder="Search..">
-
+    <p>
     <table class="w3-table w3-bordered">
         <tr>
             <th>ID</th>
             <th>Created</th>
-            <th>HTML</th>
+            <th>Name</th>
             <th class="w3-right">
                 <a href="#!add" class="w3-bar-item w3-button w3-tiny w3-btn w3-theme-l3">Add New Banner</a>
             </th>
@@ -15,27 +15,33 @@
         <tr ng-repeat="b in banners | filter : text">
             <td>{{b.id }}</td>
             <td>{{b.created | date : "dd.MM.y" }}</td>
-            <td><code>{{b.html}}</code></td>
+            <td><code>{{b.name}}</code></td>
             <td class="w3-right">
-                <button class="w3-button w3-tiny w3-grey" ng-click="edit(b)">Edit</button>
+                <button class="w3-button w3-tiny w3-green" ng-click="display(b.id)">View</button>
+                <button class="w3-button w3-tiny w3-yellow" ng-click="edit(b)">Edit</button>
                 <button class="w3-button w3-tiny w3-red" ng-click="delete(b.id)">Delete</button>
             </td>
         </tr>
     </table>
+    </p>
 
     <div id="editModal" class="w3-modal">
-        <div class="w3-modal-content">
+        <div class="w3-modal-content" >
             <form ng-submit="update()">
                 <header class="w3-container w3-theme-d4">
                     <span onclick="document.getElementById('editModal').style.display='none'"
                           class="w3-button w3-display-topright">&times;</span>
-                    <h4>Editing {{originalBanner.id}}</h4>
+                    <h4>Editing {{originalBanner.name}}</h4>
                 </header>
-                <div class="w3-container">
+                <div class="w3-container" style="height: 350px">
                     <br>
-                    <label class=""><strong>Banner HTML</strong> </label>
-                    <textarea type="text" class="w3-input w3-border" ng-model="editedBanner.html" value="" required></textarea>
+                    <label class=""><strong>Name</strong> </label>
+                    <input type="text" class="w3-input w3-border" ng-model="editedBanner.name" value="" required>
                     <br>
+                    <label class=""><strong>HTML</strong> </label>
+                    <textarea type="text" row="15" style="height: 60%"class="w3-input w3-border" ng-model="editedBanner.html" value="" required></textarea>
+                    <br>
+
                 </div>
                 <footer class="w3-container w3-theme-d4">
                     <p>

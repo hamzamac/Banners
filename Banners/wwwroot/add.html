@@ -1,14 +1,17 @@
 <div class="w3-container w3-content w3-theme-l5" ng-controller="POSTController">
 <h2>Add Banner</h2>
 <form ng-submit="submit()">
-
-    <textarea type="text" rows="10" class="w3-input w3-border" ng-model="banner.html" required></textarea>
+    <label class=""><strong>Name</strong> </label>
+    <input type="text" class="w3-input w3-border" ng-model="banner.name" value="" required>
+    <br>
+    <label class=""><strong>HTML</strong> </label>
+    <textarea type="text" rows="10" class="w3-input w3-border" ng-model="banner.html" required></textarea>
     <br>
 
     <p>
         <button type="submit" id="submit" value="Submit" class="w3-btn w3-theme-d3">Add</button>
         <a href="#/!" class="w3-btn w3-theme-d3">Cancel</a>
     </p>
-    
+
 </form>
 </div> 

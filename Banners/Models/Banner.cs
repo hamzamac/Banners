@@ -10,6 +10,8 @@ namespace Banners.Models
     {
         public int Id { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public string Html { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
