@@ -53,7 +53,7 @@
             //Deleting data through API
             $scope.delete = function(id){
                 $http.delete('/api/banners/' + id)
-                .then(function(){window.location.href ='#/!';}, function(){alert('Delete operation failed!');window.location.href ='#/!';});
+                .then(function(){window.location.href ='#/!';}, function(err){alert('Delete operation failed!' + err.data);window.location.href ='#/!';});
             };  
 
             // Update data through API
@@ -68,7 +68,9 @@
                     }
                     
                     $http(req)
-                    .then(function(){window.location.href ='#/!';}, function(err){alert('Update operation failed');});
+                        .then(function () { window.location.href = '#/!'; }, function (err) {
+                            alert("The provided banner has the following errors: \n*" + err.data.join('\n*'));
+                        });
             };            
 
         });
@@ -88,7 +90,9 @@
                     }
                     
                     $http(req)
-                    .then(function(suc){window.location.href ='#/!';}, function(err){alert('Failed to add new Banner');});
+                        .then(function (suc) { window.location.href = '#/!'; }, function (err) {
+                            alert("The provided banner has the following errors: \n*" + err.data.join('\n*'));
+                        });
                 };
         });
 
