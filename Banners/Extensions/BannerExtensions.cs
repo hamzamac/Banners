@@ -10,6 +10,7 @@ namespace Banners.Extensions
 {
     public static class BannerExtensions
     {
+        //retuns the list of erroes in the HTML document, if no error, the HTML is valid
         public static async Task<List<string>> ValidateHtmlAsync(this Banner banner)
         {
             var errors = await Validator.W3Validator(banner.Html);

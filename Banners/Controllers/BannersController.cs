@@ -21,14 +21,14 @@ namespace Banners.Controllers
             _context = context;
         }
 
-        // GET: api/Banners
+        // GET: api/banners
         [HttpGet]
         public IEnumerable<Banner> GetBanners()
         {
             return _context.Banners;
         }
 
-        // GET: api/Banners/id
+        // GET: api/banners/id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBanner([FromRoute] int id)
         {
@@ -48,7 +48,7 @@ namespace Banners.Controllers
         }
 
         // PUT: api/Banners/id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutBanner([FromRoute] int id, [FromBody] Banner banner)
         {
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace Banners.Controllers
                 return BadRequest();
             }
 
-            //validate html
+            //validate html document
             var errors = await banner.ValidateHtmlAsync();
             if (errors.Count > 0) return BadRequest(errors);
 
@@ -89,7 +89,7 @@ namespace Banners.Controllers
             return NoContent();
         }
 
-        // POST: api/Banners
+        // POST: api/banners
         [HttpPost]
         public async Task<IActionResult> PostBanner([FromBody] Banner banner)
         {
@@ -112,7 +112,7 @@ namespace Banners.Controllers
         }
 
         // DELETE: api/Banners/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteBanner([FromRoute] int id)
         {
             if (!ModelState.IsValid)

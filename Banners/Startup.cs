@@ -29,7 +29,9 @@ namespace Banners
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BannerContext>(options => options.UseInMemoryDatabase("Banner"));
-            services.AddMvc(options => options.OutputFormatters.Add(new HtmlOutputFormatter()))
+
+            services
+                .AddMvc(options => options.OutputFormatters.Add(new HtmlOutputFormatter()))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 
