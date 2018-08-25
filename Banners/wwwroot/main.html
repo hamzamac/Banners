@@ -8,14 +8,16 @@
             <th>ID</th>
             <th>Created</th>
             <th>Name</th>
+            <th>Modified</th>
             <th class="w3-right">
                 <a href="#!add" class="w3-bar-item w3-button w3-tiny w3-btn w3-theme-l3">Add New Banner</a>
             </th>
         </tr>
         <tr ng-repeat="b in banners | filter : text">
-            <td>{{b.id }}</td>
-            <td>{{b.created | date : "dd.MM.y" }}</td>
-            <td><code>{{b.name}}</code></td>
+            <td>{{ b.id }}</td>
+            <td>{{ b.created | date : "dd.MM.y HH:mm" }}</td>
+            <td>{{ b.name }}</td>
+            <td>{{ b.modified | date : "dd.MM.y HH:mm" }}</td>
             <td class="w3-right">
                 <button class="w3-button w3-tiny w3-green" ng-click="display(b.id)">View</button>
                 <button class="w3-button w3-tiny w3-yellow" ng-click="edit(b)">Edit</button>
